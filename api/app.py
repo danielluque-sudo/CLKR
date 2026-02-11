@@ -119,7 +119,7 @@ async def scrape_laws(request: ScrapeRequest, background_tasks: BackgroundTasks)
         laws = scraper.scrape_year(request.year, max_attempts=request.max_laws)
 
         if not laws:
-            raise HTTPException(status_code=404, message=f"No laws found for year {request.year}")
+            raise HTTPException(status_code=404, detail=f"No laws found for year {request.year}")
 
         # Process with AI if available
         if ai_processor:
