@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import FeatureCard from "@/components/FeatureCard";
 import StatsCard from "@/components/StatsCard";
@@ -18,29 +19,50 @@ export default function Home() {
         </div>
 
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-6xl md:text-7xl">
-              <span className="block">Base de Datos</span>
-              <span className="block gradient-text">Legal Colombiana</span>
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-600 dark:text-gray-300 sm:text-xl">
-              Consulta, busca y analiza leyes colombianas con inteligencia
-              artificial. Accede a información legal actualizada de forma
-              rápida y eficiente.
-            </p>
-            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Link
-                href="/search"
-                className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-blue-500 to-purple-600 px-8 py-4 text-lg font-medium text-white shadow-lg transition-all hover:shadow-2xl hover:shadow-blue-500/50 hover:scale-105"
-              >
-                <span className="relative">🔍 Buscar Leyes</span>
-              </Link>
-              <Link
-                href="/scraper"
-                className="group inline-flex items-center justify-center rounded-full glass px-8 py-4 text-lg font-medium text-gray-900 dark:text-white transition-all hover:shadow-xl"
-              >
-                <span className="relative">⚙️ Iniciar Scraper</span>
-              </Link>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left side - Text content */}
+            <div className="text-center lg:text-left">
+              <h1 className="text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-6xl md:text-7xl">
+                <span className="block">Base de Datos</span>
+                <span className="block gradient-text">Legal Colombiana</span>
+              </h1>
+              <p className="mt-6 max-w-2xl text-lg text-gray-600 dark:text-gray-300 sm:text-xl lg:mx-0 mx-auto">
+                Consulta, busca y analiza leyes colombianas con inteligencia
+                artificial. Accede a información legal actualizada de forma
+                rápida y eficiente.
+              </p>
+              <div className="mt-10 flex flex-col items-center lg:items-start justify-center lg:justify-start gap-4 sm:flex-row">
+                <Link
+                  href="/search"
+                  className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-blue-500 to-purple-600 px-8 py-4 text-lg font-medium text-white shadow-lg transition-all hover:shadow-2xl hover:shadow-blue-500/50 hover:scale-105"
+                >
+                  <span className="relative">🔍 Buscar Leyes</span>
+                </Link>
+                <Link
+                  href="/scraper"
+                  className="group inline-flex items-center justify-center rounded-full glass px-8 py-4 text-lg font-medium text-gray-900 dark:text-white transition-all hover:shadow-xl"
+                >
+                  <span className="relative">⚙️ Iniciar Scraper</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Right side - Image */}
+            <div className="relative lg:block hidden">
+              <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 z-10" />
+                <Image
+                  src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1200&auto=format&fit=crop"
+                  alt="Colombian Legal System - Justice and Law"
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+              {/* Decorative elements */}
+              <div className="absolute -bottom-6 -right-6 h-72 w-72 rounded-full bg-gradient-to-br from-blue-400 to-purple-600 opacity-20 blur-3xl -z-10" />
+              <div className="absolute -top-6 -left-6 h-72 w-72 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 opacity-20 blur-3xl -z-10" />
             </div>
           </div>
         </div>
