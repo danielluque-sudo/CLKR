@@ -92,8 +92,8 @@ En **"Environment Variables"**, agrega:
 
 | Name | Value |
 |------|-------|
-| `SUPABASE_URL` | `https://qkyojpaawsdckzixzqnd.supabase.co` |
-| `SUPABASE_KEY` | `sb_publishable_38nUetGLXCCPO-bYAmdSBg_zwI1EyQD` |
+| `SUPABASE_URL` | `your_supabase_url_here` |
+| `SUPABASE_KEY` | `your_supabase_key_here` |
 | `ANTHROPIC_API_KEY` | `sk-ant-api03-xIj...` (tu key completa) |
 
 ### Paso 5: Deploy

@@ -1,0 +1,11 @@
+# Railway/Render deployment requirements
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+requests==2.31.0
+beautifulsoup4==4.12.2
+lxml==4.9.3
+python-dotenv==1.0.0
+supabase==2.3.0
+anthropic==0.8.0
+python-multipart==0.0.6
