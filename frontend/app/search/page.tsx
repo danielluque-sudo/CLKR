@@ -2,15 +2,7 @@
 
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
-
-interface Law {
-  id: string;
-  numero: string;
-  year: number;
-  fecha: string;
-  epigrafe: string;
-  summary?: string;
-}
+import { api, type Law } from "@/lib/api";
 
 export default function SearchPage() {
   const [query, setQuery] = useState("");
@@ -24,14 +16,15 @@ export default function SearchPage() {
   const handleSearch = async () => {
     setLoading(true);
     try {
-      // TODO: Replace with actual API call
-      const response = await fetch(
-        `/api/search?query=${encodeURIComponent(query)}&year=${filters.year}&type=${filters.type}`
-      );
-      const data = await response.json();
+      const data = await api.search({
+        query: query || undefined,
+        year: filters.year ? parseInt(filters.year) : undefined,
+        type: filters.type || undefined,
+      });
       setResults(data.results || []);
     } catch (error) {
       console.error("Search error:", error);
+      setResults([]);
     } finally {
       setLoading(false);
     }

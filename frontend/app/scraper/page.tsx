@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
+import { api } from "@/lib/api";
 
 interface ScraperStatus {
   running: boolean;
@@ -27,23 +28,25 @@ export default function ScraperPage() {
 
   const startScraper = async () => {
     try {
-      const response = await fetch("/api/scrape", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(config),
+      const data = await api.startScrape({
+        year: config.year,
+        max_laws: config.max_laws,
+        use_ai: config.use_ai,
       });
-      const data = await response.json();
       setStatus({ ...status, running: true });
-      // TODO: Implement WebSocket for real-time updates
+      console.log("Scraper started:", data);
+      // TODO: Implement polling for status updates using data.task_id
     } catch (error) {
       console.error("Scraper error:", error);
+      alert("Failed to start scraper. Please check the console for details.");
     }
   };
 
   const stopScraper = async () => {
     try {
-      await fetch("/api/scrape/stop", { method: "POST" });
+      // Note: Backend doesn't have a stop endpoint yet, so just update UI
       setStatus({ ...status, running: false });
+      console.log("Scraper stopped");
     } catch (error) {
       console.error("Stop error:", error);
     }
