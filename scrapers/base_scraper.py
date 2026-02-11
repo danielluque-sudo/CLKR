@@ -7,6 +7,8 @@ import logging
 from datetime import datetime
 import time
 import config
+import certifi
+import ssl
 
 
 class BaseScraper(ABC):
@@ -15,6 +17,10 @@ class BaseScraper(ABC):
     def __init__(self, source_name: str):
         self.source_name = source_name
         self.session = requests.Session()
+
+        # Use certifi's certificate bundle for SSL verification
+        self.session.verify = certifi.where()
+
         self.session.headers.update({
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
