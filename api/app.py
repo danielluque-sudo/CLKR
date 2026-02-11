@@ -10,11 +10,16 @@ import sys
 import os
 
 # Add parent directory to path
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# In Railway/production, __file__ is /app/api/app.py, parent is /app
+parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, parent_dir)
+# Also add /app explicitly in case we're in Railway
+if os.path.exists('/app'):
+    sys.path.insert(0, '/app')
 
 from scrapers.suin_scraper import SuinScraper
 from processors.ai_processor import AIProcessor
-from database.supabase_client import SupabaseClient
+from db.supabase_client import SupabaseClient
 import config
 
 # Initialize FastAPI
