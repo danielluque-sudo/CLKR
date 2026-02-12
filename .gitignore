@@ -19,6 +19,7 @@ build/
 venv/
 env/
 ENV/
+.venv/
 
 # Logs
 logs/

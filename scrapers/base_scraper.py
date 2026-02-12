@@ -2,6 +2,7 @@
 from abc import ABC, abstractmethod
 from typing import List, Dict, Optional
 import requests
+import certifi
 from bs4 import BeautifulSoup
 import logging
 from datetime import datetime
@@ -20,6 +21,11 @@ class BaseScraper(ABC):
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
             'Accept-Language': 'es-CO,es;q=0.9,en;q=0.8',
         })
+        # Force a known CA bundle to avoid missing system certs in containers.
+        self.session.verify = certifi.where()
+        if config.SCRAPER_DISABLE_SSL_VERIFY:
+            self.logger.warning("SCRAPER_DISABLE_SSL_VERIFY=true: SSL verification disabled")
+            self.session.verify = False
         self.logger = logging.getLogger(f"scraper.{source_name}")
 
     @abstractmethod
@@ -56,6 +62,9 @@ class BaseScraper(ABC):
                 else:
                     self.logger.error(f"Failed to fetch {url} after {config.MAX_RETRIES} attempts")
                     return None
+            except Exception as e:
+                self.logger.error(f"Unexpected error fetching {url}: {e}")
+                return None
 
     def download_pdf(self, url: str, save_path: str) -> bool:
         """Download PDF file with retry logic"""
