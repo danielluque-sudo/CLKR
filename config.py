@@ -16,6 +16,7 @@ SCRAPER_DELAY = 2  # Seconds between requests
 MAX_RETRIES = 3
 TIMEOUT = 30
 TEST_MODE = os.getenv('TEST_MODE', 'false').lower() == 'true'
+SCRAPER_DISABLE_SSL_VERIFY = os.getenv('SCRAPER_DISABLE_SSL_VERIFY', 'false').lower() == 'true'
 
 # File paths
 DATA_DIR = 'data'
